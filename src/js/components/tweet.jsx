@@ -24,19 +24,26 @@ export default React.createClass({
     var html = `<span>${tweet.text}</span>`;
     //return virtualize.fromHTML(text.replace(/https?:\/\/[^ ]*/g, '<a href="\1">\1</a>'));
     var re = new RegExp('(https?://[^ ]*)',"g");
-    tweet.entities.urls.forEach( (url) => {
+    var entities = tweet.extended_entities || tweet.entities;
+    (entities.urls || []).forEach( (url) => {
       html = html.replace(url.url, `<a target="_blank" href="${url.expanded_url || url.url}">${url.expanded_url || url.url}</a>`);
     });
-    (tweet.entities.media || []).forEach( (url) => {
-      html = html.replace(url.url, `<a target="_blank" href="${url.media_url_https}">${url.expanded_url || url.url}</a>`);
+    if(entities.media) {
+      var mediaUrls = entities.media.reduce( (result, media) => {
+        return result + `<a href="${media.media_url_https}" target="_blank"><img class="tweet__media" src="${media.media_url_https}:small" /></a>`;
+      }, "<br />");
+      html += mediaUrls;
+    }
+    (entities.media || []).forEach( (url) => {
+      html = html.replace(url.url, `<a target="_blank" href="${url.expanded_url || url.url}">${url.expanded_url || url.url}</a>`);
     });
-    (tweet.entities.hashtags || []).forEach( (tag) => {
+    (entities.hashtags || []).forEach( (tag) => {
       var hashtag = `#${tag.text}`
       html = html.replace(hashtag, `<a target="_blank" href="https://twitter.com/search?q=${encodeURIComponent(hashtag)}">${hashtag}</a>`);
     });
-    (tweet.entities.user_mentions || []).forEach( (mention) => {
+    (entities.mentions || []).forEach( (mention) => {
       var m = `@${mention.screen_name}`
-      html = html.replace(m, `<a target="_blank" href="https://twitter.com/${mention.screen_name}">${m}</a>`);
+      html = html.replace(m, `<strong>${m}</strong>`);
     });
     html = html.replace(new RegExp("\n","g"), '<br />');
     return html;
@@ -110,6 +117,10 @@ export default React.createClass({
     this.getFlux().actions.changeTimeline("user", tweet.user.screen_name);
   },
 
+  onClickAuthorName(ev) {
+    this.itemUserInfo(this.props.tweet.retweeted_status || this.props.tweet);
+  },
+
   render() {
     var tweet = this.props.tweet;
     var mainTweet = tweet.retweeted_status || tweet;
@@ -126,9 +137,7 @@ export default React.createClass({
       <div className="tweetBody">
         <p className="tweetBody__head">
           {protectedIcon}
-          <a href={`https://twitter.com/${mainTweet.user.screen_name}`}>
-            <strong className="tweetBody__screenName">{mainTweet.user.screen_name}</strong>
-          </a>
+          <strong onClick={this.onClickAuthorName} className="tweetBody__screenName">{mainTweet.user.screen_name}</strong>
           <small className="tweetBody__userName">{mainTweet.user.name}</small>
           <a href={url} className="tweetBody__timestamp">{strftime("%F %T", new Date(mainTweet.created_at))}</a>
         </p>

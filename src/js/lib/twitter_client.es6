@@ -77,6 +77,7 @@ export default class TwitterClient {
   }
 
   userTimeline(params = {}){
-    return this.request("/statuses/user_timeline.json", "GET", params);
+    var defaultParams = { count: 100, include_entities: "true", include_rts: "true" };
+    return this.request("/statuses/user_timeline.json", "GET", _.merge(defaultParams, params));
   }
 }
