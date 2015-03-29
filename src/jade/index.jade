@@ -1,0 +1,18 @@
+html
+  head
+    meta(charset="utf-8")
+    link(href="./foo.css" rel="stylesheet")
+    link(href="./elusive-icons/css/elusive-icons.css" rel="stylesheet")
+  body
+    script
+      | clipboard = require('clipboard'); // atom-shell builtin
+      | window.openExternal = function(url) {
+      |   require('shell').openExternal(url);
+      | }
+      | window.addEventListener('click', function(ev){
+      |   var target = ev.target;
+      |   if(target.nodeName === "A"){
+      |     ev.preventDefault();openExternal(target.href);
+      |   }
+      | });
+    script(src="./bundle.js")

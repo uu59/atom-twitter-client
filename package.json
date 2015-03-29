@@ -1,0 +1,44 @@
+{
+  "name": "twittercli",
+  "version": "1.0.0",
+  "description": "twitter",
+  "main": "./build/main.js",
+  "scripts": {
+    "watchify": "watchify --help",
+    "ugl": "uglifyjs2 --help",
+    "make": "./runner.coffee",
+    "watch": "./runner.coffee watch",
+    "atom-shell": "~/src/atom/atom .",
+    "build": "./runner.coffee build",
+    "runner": "./runner.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.12",
+    "fluxxor": "^1.5.2",
+    "global": "^4.3.0",
+    "lodash": "^3.5.0",
+    "oauth-1.0a": "^0.1.1",
+    "qs": "^2.4.1",
+    "react": "^0.13.1",
+    "strftime": "^0.8.4",
+    "superagent": "^1.1.0",
+    "uglify-js2": "^2.1.11"
+  },
+  "devDependencies": {
+    "babel": "^4.7.5",
+    "babelify": "^5.0.4",
+    "brfs": "^1.4.0",
+    "browser-request": "^0.3.3",
+    "browserify": "^9.0.3",
+    "coffee-script": "^1.9.1",
+    "envify": "^3.4.0",
+    "jade": "^1.9.2",
+    "shelljs": "^0.3.0",
+    "stylus": "^0.50.0",
+    "uglify-js": "^2.4.17",
+    "watchify": "^2.4.0"
+  }
+}
