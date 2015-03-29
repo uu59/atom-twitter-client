@@ -20,7 +20,7 @@ export default React.createClass({
     var replyTo = this.props.replyTo;
     return <form className="timeline__form" onSubmit={this.onSubmit}>
       {replyTo ? <p>Reply to: {`@${replyTo.user.screen_name}\n${replyTo.text}`}</p> : ""}
-      <textarea type="text" name="status" onKeyUp={this.onTextChange}>{this.state.status}</textarea>
+      <textarea placeholder={`Post from @${this.state.client.user}`} type="text" name="status" onKeyUp={this.onTextChange}>{this.state.status}</textarea>
       <p>
         <input type="hidden" name="inReplyTo" value={replyTo && replyTo.id_str} />
         <input type="submit" value="post" />
