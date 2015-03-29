@@ -71,4 +71,8 @@ export default class TwitterClient {
   search(params = {}){
     return this.request("/search/tweets.json", "GET", params);
   }
+
+  retweet(id) {
+    return this.request(`/statuses/retweet/${id}.json`, "POST");
+  }
 }

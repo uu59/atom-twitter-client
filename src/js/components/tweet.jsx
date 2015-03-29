@@ -7,7 +7,18 @@ import ContextMenu from "../lib/context_menu.es6";
 import TweetForm from "./tweet_form.jsx";
 
 export default React.createClass({
-  mixins: [Fluxxor.FluxMixin(React)],
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('twitterAccount')
+  ],
+
+  twitter() {
+    return this.getFlux().store('twitterAccount');
+  },
+
+  getStateFromFlux() {
+    return {};
+  },
 
   markupBody(tweet) {
     var html = `<span>${tweet.text}</span>`;
@@ -83,6 +94,8 @@ export default React.createClass({
   },
 
   itemRetweet(tweet) {
+    var id = tweet.retweeted_status ? tweet.retweeted_status.id_str : tweet.id_str;
+    this.twitter().client.retweet(id);
   },
 
   itemConversation(tweet) {
