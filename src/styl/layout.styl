@@ -1,15 +1,20 @@
+layout-columns =
+  flex: 0 1 auto
+  align-self stretch
+  box-sizing border-box
+
 .container
   width: 100%
   display: flex
+  align-content: stretch
   .container--sidebar
     min-width: layoutSidebarWidth
-    flex: 0 1 auto
+    padding-top: layoutPadding
+    {layout-columns}
   .container--channels
     min-width: layoutChannelsWidth
-    flex: 0 1 auto
-    h1
-      margin 0
-      padding 0
+    padding-top: layoutPadding
+    {layout-columns}
   .container--main
-    flex: 0 1 auto
+    {layout-columns}
 
