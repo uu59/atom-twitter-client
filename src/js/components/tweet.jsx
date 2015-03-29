@@ -65,6 +65,9 @@ export default React.createClass({
         {label: "本文をコピー", action: (ev) => this.itemCopyText(tweet) },
         {label: "ツイートURLをコピー", action: (ev) => this.itemCopyUrl(tweet) },
         {label: `@${tweet.user.screen_name}`, action: (ev) => this.itemUserInfo(tweet) },
+        (tweet.retweeted_status && {
+          label: `@${tweet.retweeted_status.user.screen_name}`, action: (ev) => this.itemUserInfo(tweet.retweeted_status),
+        }),
         {label: "会話を表示", action: (ev) => this.itemConversation(tweet) },
       ]
     });
@@ -103,7 +106,8 @@ export default React.createClass({
   },
 
   itemUserInfo(tweet) {
-    console.log('itemUserInfo clicked');
+    console.log('itemUserInfo clicked', tweet, tweet.user.screen_name);
+    this.getFlux().actions.changeTimeline("user", tweet.user.screen_name);
   },
 
   render() {

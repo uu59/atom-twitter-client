@@ -26,7 +26,7 @@ export default React.createClass({
 
   fetchTimeline(props, params = {}) {
     var client = props.client;
-    console.log("fetchTimeline", client.user, props);
+    console.log("fetchTimeline", client.user, props, props.type, props.args);
     switch(props.type){
       case "home":
         return client.homeTimeline(_.merge(params));
@@ -34,6 +34,9 @@ export default React.createClass({
       case "list":
         // TODO
         return client.listStatuses(_.merge({list_id: props.args}, params));
+        break;
+      case "user":
+        return client.userTimeline(_.merge({screen_name: props.args}, params));
         break;
     }
   },

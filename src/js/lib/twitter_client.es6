@@ -75,4 +75,8 @@ export default class TwitterClient {
   retweet(id) {
     return this.request(`/statuses/retweet/${id}.json`, "POST");
   }
+
+  userTimeline(params = {}){
+    return this.request("/statuses/user_timeline.json", "GET", params);
+  }
 }
