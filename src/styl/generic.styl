@@ -1,3 +1,7 @@
+baseBackgroundColor = #f8f7f1
+layoutSidebarWidth = 48px
+layoutChannelsWidth = 180px
+
 html,body
   padding: 0
   margin 0
@@ -5,7 +9,7 @@ html,body
 body
   color #666
   font-size small
-  background-color: #f8f7f1
+  background-color: baseBackgroundColor
   *
     letter-spacing: normal; // fix strange rendering
 
@@ -23,3 +27,6 @@ clearfix()
   &:after
     clear both
 
+subtle-link()
+  color #998
+  text-decoration: none

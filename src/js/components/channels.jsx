@@ -27,7 +27,7 @@ export default React.createClass({
         <h1>lists</h1>
         {this.props.lists.map((list) => {
           var slug = `@${this.props.screenName}/${list.slug}`;
-          return <p onClick={this.onClick} data-type="list" data-slug={list.id}>{list.name}({list.slug})</p>
+          return <p onClick={this.onClick} data-type="list" data-slug={list.id}>{list.name}</p>
         })}
       </div>
     </div>;

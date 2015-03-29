@@ -51,7 +51,7 @@ export default class TwitterClient {
   }
 
   homeTimeline(params = {}) {
-    var defaultParams = { count: 200, include_entities: "true" };
+    var defaultParams = { count: 100, include_entities: "true" };
     return this.request("/statuses/home_timeline.json", "GET", _.merge(defaultParams, params));
   }
 
@@ -60,7 +60,8 @@ export default class TwitterClient {
   }
 
   listStatuses(params = {}){
-    return this.request("/lists/statuses.json", "GET", params);
+    var defaultParams = { count: 100, include_entities: "true", include_rts: "true" };
+    return this.request("/lists/statuses.json", "GET", _.merge(defaultParams, params));
   }
 
   lists(params = {}){

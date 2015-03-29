@@ -1,43 +1,61 @@
-.tweet--common
-  padding 1ex 0
-  display table
-  width 100%
-  border-bottom 1px solid #f0f0f0
-  img
-    width 32px
-    height 32px
-  .tweet__protectedIcon
-    font-size: 9px
-    color: #666
-  .tweet__userimage
-    display table-cell
-    width 36px
-  .tweetBody
-    display table-cell
-    vertical-align top
-    word-break: break-word
-    p
-      margin 0
-      padding 0
-    .tweetBody__timestamp
-      float: right
-      font-family: monospace
-      color #998
-      text-decoration: none
-    .tweetBody__userName
-      padding-left: 1ex
-  .tweet__retweet
-    img
-      width: 16px
-      height: 16px
+formHeight = 95px
 
 .timeline
-  overflow auto
   height 100%
   padding 0 1em
-  .tweet--selected
-    @extend .tweet--common
-    background-color #e9e9e9
+  overflow auto
+  position relative
+  &__form
+    height: formHeight
+    background-color: baseBackgroundColor
+    position fixed
+    right 24px
+    left layoutSidebarWidth + layoutChannelsWidth
+    z-index 2
+    margin 0
+    padding 1em
+    box-sizing border-box
+    textarea
+      width: 100%
+      height: 3em
+  &__tweets
+    margin-top formHeight
+    height 100%
   .tweet
-    @extend .tweet--common
+    padding 1ex 0
+    display table
+    width 100%
+    border-bottom 1px solid #f0f0f0
+    img
+      width 32px
+      height 32px
+    .tweet__protectedIcon
+      font-size: 9px
+      color: #666
+    .tweet__userimage
+      display table-cell
+      width 36px
+    .tweetBody
+      display table-cell
+      vertical-align top
+      word-break: break-word
+      p
+        margin 0
+        padding 0
+      &__timestamp
+        float: right
+        font-family: monospace
+        subtle-link()
+      &__userName
+        padding-left: 1ex
+      &__source
+        a
+          subtle-link()
+    .tweet__retweet
+      img
+        width: 16px
+        height: 16px
 
+  .tweet--selected
+    @extend .timeline .tweet
+    background-color #e9e9e9
