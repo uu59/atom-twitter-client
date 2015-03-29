@@ -18,7 +18,7 @@ export default React.createClass({
         top: ctx.pos.top,
         left: ctx.pos.left
       },
-      items: ctx.items
+      items: ctx.items.filter((item) => item)
     };
   },
 
