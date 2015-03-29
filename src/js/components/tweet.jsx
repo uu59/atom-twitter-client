@@ -113,7 +113,7 @@ export default React.createClass({
     var onContext = (ev) => {
       this.onContextmenu(ev, tweet);
     };
-    var protectedIcon = (tweet.user.protected ? <i className="tweet__protectedIcon el el-lock" /> : "");
+    var protectedIcon = (mainTweet.user.protected ? <i className="tweet__protectedIcon el el-lock" /> : "");
     var url = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
     return <div className="tweet" onContextMenu={onContext}>
       <div className="tweet__userimage">
