@@ -143,6 +143,16 @@ export default React.createClass({
         </p>
         <p className="tweetBody__body" dangerouslySetInnerHTML={{__html: body}}>
         </p>
+        <div className="tweetBody__social">
+          {tweet.favorite_count > 0 ?
+            <em className="tweetBody__social__fav"><i className="el el-star" />{tweet.favorite_count}</em> :
+            ""
+          }
+          {tweet.retweet_count > 0 ?
+            <em className="tweetBody__social__retweet"><i className="el el-retweet" />{tweet.retweet_count}</em> :
+            ""
+          }
+        </div>
         <small className="tweetBody__source" dangerouslySetInnerHTML={{__html: mainTweet.source.replace("<a", '<a target="blank"')}} />
         {tweet.retweeted_status ? this.renderRetweet(tweet) : ""}
       </div>
