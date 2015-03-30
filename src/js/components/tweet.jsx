@@ -24,12 +24,13 @@ export default React.createClass({
     var html = `<span>${tweet.text}</span>`;
     //return virtualize.fromHTML(text.replace(/https?:\/\/[^ ]*/g, '<a href="\1">\1</a>'));
     var re = new RegExp('(https?://[^ ]*)',"g");
-    var entities = tweet.extended_entities || tweet.entities;
+    var entities = tweet.entities;
+    var extEntities = tweet.extended_entities;
     (entities.urls || []).forEach( (url) => {
       html = html.replace(url.url, `<a target="_blank" href="${url.expanded_url || url.url}">${url.expanded_url || url.url}</a>`);
     });
     if(entities.media) {
-      var mediaUrls = entities.media.reduce( (result, media) => {
+      var mediaUrls = extEntities.media.reduce( (result, media) => {
         return result + `<a href="${media.media_url_https}" target="_blank"><img class="tweet__media" src="${media.media_url_https}:small" /></a>`;
       }, "<br />");
       html += mediaUrls;
@@ -41,7 +42,7 @@ export default React.createClass({
       var hashtag = `#${tag.text}`
       html = html.replace(hashtag, `<a target="_blank" href="https://twitter.com/search?q=${encodeURIComponent(hashtag)}">${hashtag}</a>`);
     });
-    (entities.mentions || []).forEach( (mention) => {
+    (entities.user_mentions || []).forEach( (mention) => {
       var m = `@${mention.screen_name}`
       html = html.replace(m, `<strong>${m}</strong>`);
     });
