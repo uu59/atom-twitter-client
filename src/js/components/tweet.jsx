@@ -22,10 +22,9 @@ export default React.createClass({
 
   markupBody(tweet) {
     var html = `<span>${tweet.text}</span>`;
-    //return virtualize.fromHTML(text.replace(/https?:\/\/[^ ]*/g, '<a href="\1">\1</a>'));
     var re = new RegExp('(https?://[^ ]*)',"g");
     var entities = tweet.entities;
-    var extEntities = tweet.extended_entities;
+    var extEntities = tweet.extended_entities || entities; // search result doesn't have extended_entities
     (entities.urls || []).forEach( (url) => {
       html = html.replace(url.url, `<a target="_blank" href="${url.expanded_url || url.url}">${url.expanded_url || url.url}</a>`);
     });

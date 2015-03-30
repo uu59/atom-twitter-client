@@ -1,5 +1,6 @@
 import Fluxxor from "fluxxor";
 import React from "react";
+import _ from "lodash";
 
 export default React.createClass({
   mixins: [
@@ -7,12 +8,14 @@ export default React.createClass({
     Fluxxor.StoreWatchMixin('twitterLists')
   ],
 
-  store() {
-    return this.getFlux().store('twitterLists');
+  getInitialState() {
+    return {
+      searches: []
+    }
   },
 
   getStateFromFlux() {
-    return this.store().getState();
+    return this.getFlux().store('twitterLists').getState();
   },
 
   render() {
@@ -20,6 +23,18 @@ export default React.createClass({
       <section className="channel__fixed">
         <h1>ch</h1>
         <p onClick={this.onClick.bind(this, "home", {})} data-type="home">Home</p>
+      </section>
+      <section className="channel__searches">
+        <h1>search</h1>
+        <form onSubmit={this.onSubmitSearch}>
+          <input type="text" name="q" />
+        </form>
+        {this.state.searches.map((q) => {
+          return <p key={q}>
+            <span onClick={this.doSearch.bind(this, q)}>{q}</span>
+            <i className="el el-remove" onClick={this.onClickSearchClose.bind(this, q)}></i>
+          </p>
+        })}
       </section>
       <section className="channel__lists">
         <h1>lists</h1>
@@ -33,6 +48,26 @@ export default React.createClass({
 
   onClick(type, args, ev) {
     this.getFlux().actions.changeTimeline(type, args);
-  }
+  },
+
+  onSubmitSearch(ev) {
+    ev.preventDefault();
+    var form = ev.currentTarget;
+    this.doSearch(form.q.value);
+  },
+
+  onClickSearchClose(q, ev) {
+    console.log(arguments);
+    this.setState({
+      searches: _.remove(this.state.searches, q)
+    });
+  },
+
+  doSearch(q) {
+    this.getFlux().actions.searchTwitter({q: q});
+    this.setState({
+      searches: _.uniq(this.state.searches.concat(q))
+    });
+  },
 })
 

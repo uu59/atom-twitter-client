@@ -23,6 +23,10 @@ export default {
     this.dispatch('changeTimeline', {type: type, args: args});
   },
 
+  searchTwitter(params = {}) {
+    this.dispatch('changeTimeline', {type: "search", args: params});
+  },
+
   updateStatus(status) {
     this.dispatch('updateStatus', status);
   },

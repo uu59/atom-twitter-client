@@ -74,7 +74,14 @@ export default class TwitterClient {
   }
 
   search(params = {}){
-    return this.request("/search/tweets.json", "GET", params);
+    return this.searchRaw(params).then((result) => {
+      return result.statuses;
+    });
+  }
+
+  searchRaw(params = {}) {
+    var defaultParams = {result_type: "recent", count: 100, include_entities: "true"}
+    return this.request("/search/tweets.json", "GET", _.merge(defaultParams, params));
   }
 
   retweet(id) {

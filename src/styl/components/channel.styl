@@ -5,9 +5,24 @@
     h1
       margin 0
       padding 0
-    p
-      cursor: pointer
+    p,form
       margin: 0
       padding: 1ex 0
+    p
+      cursor: pointer
       &:hover
         color: #793
+    &__searches
+      p
+        display table
+        width 100%
+        span, .el
+          display table-cell
+        .el
+          text-align: right
+          vertical-align: middle
+          width 2em
+          height 2em
+          font-size 0.7em
+          &:hover
+            color: #943
