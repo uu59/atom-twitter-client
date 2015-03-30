@@ -21,12 +21,20 @@ export default React.createClass({
   },
 
   render() {
+    var className = this.state.loading ?  "timeline__tweets--loading" : "timeline__tweets";
     return <div className="timeline" onScroll={this.onScroll}>
       <TweetForm client={this.props.client} />
-      <div className="timeline__tweets">
-        {this.state.tweets.map((tweet) => {
-          return <Tweet key={tweet.id} tweet={tweet} />;
-        })}
+      <div className={className}>
+        {
+          this.state.tweets.map((tweet) => {
+            return <Tweet key={tweet.id} tweet={tweet} />;
+          })
+        }
+        {
+          this.state.loading ?
+            <i className="el el-refresh el-3x el-spin"></i> :
+            ""
+        }
       </div>
     </div>;
   },

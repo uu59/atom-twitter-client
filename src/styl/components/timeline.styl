@@ -19,8 +19,16 @@ formHeight = 100px
       width: 100%
       height: 3em
   &__tweets
-    margin-top formHeight
+    padding-top formHeight
     height 100%
+    box-sizing: border-box
+  &__tweets--loading
+    @extend .timeline__tweets
+    .el
+      position: absolute
+      top 50%
+      left 50%
+      color #c0c9c0
   .tweet
     padding 1ex 0
     display table
