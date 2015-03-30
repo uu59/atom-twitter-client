@@ -115,7 +115,7 @@ export default React.createClass({
 
   itemUserInfo(tweet) {
     console.log('itemUserInfo clicked', tweet, tweet.user.screen_name);
-    this.getFlux().actions.changeTimeline("user", tweet.user.screen_name);
+    this.getFlux().actions.changeTimeline("user", {screen_name: tweet.user.screen_name});
   },
 
   onClickAuthorName(ev) {

@@ -9,11 +9,14 @@ export default React.createClass({
     Fluxxor.StoreWatchMixin('twitterAccount')
   ],
 
+  getInitialState() {
+    return {
+      type: "home",
+    };
+  },
+
   getStateFromFlux() {
     var store = this.getFlux().store('twitterAccount');
-    store.on('changeTimeline', ()=>{
-      this.emit('change');
-    });
     return store.getState();
   },
 

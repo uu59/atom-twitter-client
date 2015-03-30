@@ -8,37 +8,16 @@ import TweetForm from "./tweet_form.jsx";
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('timeline'),
   ],
 
   getInitialState() {
-    return {
-      tweets: [],
-    }
+    return { };
   },
 
-  componentWillReceiveProps(nextProps) {
-    this.fetchTimeline(nextProps).then((tweets) => {
-      console.log(tweets[0]);
-      this.setState({tweets: tweets});
-    });
-  },
-
-
-  fetchTimeline(props, params = {}) {
-    var client = props.client;
-    console.log("fetchTimeline", client.user, props, props.type, props.args);
-    switch(props.type){
-      case "home":
-        return client.homeTimeline(_.merge(params));
-        break;
-      case "list":
-        // TODO
-        return client.listStatuses(_.merge({list_id: props.args}, params));
-        break;
-      case "user":
-        return client.userTimeline(_.merge({screen_name: props.args}, params));
-        break;
-    }
+  getStateFromFlux() {
+    var store = this.getFlux().store('timeline');
+    return store.getState();
   },
 
   render() {
@@ -62,9 +41,9 @@ export default React.createClass({
       this._fetching = true;
       var lastTweet = this.state.tweets[this.state.tweets.length - 1];
       var maxIdParam = (lastTweet ? {max_id: lastTweet.id_str} : {});
-      this.fetchTimeline(this.props, maxIdParam).then((tweets) => {
+      var store = this.getFlux().store('timeline');
+      store.loadMore(maxIdParam).then(()=> {
         this._fetching = false;
-        this.setState({tweets: this.state.tweets.concat(tweets)})
       }.bind(this));
     }
   }

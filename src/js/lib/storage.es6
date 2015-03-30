@@ -20,6 +20,10 @@ class Storage extends EventEmitter {
   get(key) {
     return storage.getItem(key);
   }
+
+  users() {
+    return JSON.parse(this.get('users'));
+  }
 }
 
 var instance = new Storage;

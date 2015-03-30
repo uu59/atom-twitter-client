@@ -20,7 +20,7 @@ export default React.createClass({
     var replyTo = this.props.replyTo;
     return <form className="postform" onSubmit={this.onSubmit}>
       {replyTo ? <p>Reply to: {`@${replyTo.user.screen_name}\n${replyTo.text}`}</p> : ""}
-      <textarea placeholder={`Post from @${this.state.client.user}`} type="text" name="status" onKeyUp={this.onTextChange}>{this.state.status}</textarea>
+      <textarea placeholder={`Post from @${this.state.client.user}`} type="text" name="status" onKeyUp={this.onTextChange} defaultValue={this.state.status} />
       <p>
         <input type="hidden" name="inReplyTo" value={replyTo && replyTo.id_str} />
         <input type="submit" value="post" />
@@ -45,9 +45,7 @@ export default React.createClass({
   },
 
   onTextChange(ev) {
-    console.log('onTextChange', ev);
     this.setState({
-
       textCount: ev.currentTarget.value.length
     });
   },

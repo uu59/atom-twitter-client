@@ -66,6 +66,11 @@ export default class TwitterClient {
 
   lists(params = {}){
     return this.request("/lists/list.json", "GET", params);
+    // dummy value for rate limited
+    // var u = this.user;
+    // return new Promise(function(r){
+    //   r([{id: u, slug: u, name: u}]);
+    // });
   }
 
   search(params = {}){

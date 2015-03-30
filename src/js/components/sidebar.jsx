@@ -6,8 +6,8 @@ export default React.createClass({
 
   render() {
     return <div className="sidebar">
-      {this.props.knownNames.map( (n) =>{
-        return <p onClick={this.onClickName} data-screen-name={n}>
+      {this.props.userNames.map( (n) =>{
+        return <p key={n} onClick={this.onClickName} data-screen-name={n}>
           <img src={`http://twiticon.herokuapp.com/${n}`} alt={n} title={n} />
         </p>;
       })}

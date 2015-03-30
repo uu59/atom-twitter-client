@@ -4,39 +4,34 @@ import React from "react";
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
-    Fluxxor.StoreWatchMixin('twitterAccount')
+    Fluxxor.StoreWatchMixin('twitterLists')
   ],
 
   store() {
-    return this.getFlux().store('twitterAccount');
+    return this.getFlux().store('twitterLists');
   },
 
   getStateFromFlux() {
-    return {
-      lists: []
-    }
+    return this.store().getState();
   },
 
   render() {
     return <div className="channel">
       <div className="channel--fixed">
         <h1>ch</h1>
-        <p onClick={this.onClick} data-type="home">Home</p>
+        <p onClick={this.onClick.bind(this, "home", {})} data-type="home">Home</p>
       </div>
       <div className="channel--lists">
         <h1>lists</h1>
-        {this.props.lists.map((list) => {
-          var slug = `@${this.props.screenName}/${list.slug}`;
-          return <p onClick={this.onClick} data-type="list" data-slug={list.id}>{list.name}</p>
+        {this.state.lists.map((list) => {
+          var slug = `@${this.props.currentUser}/${list.slug}`;
+          return <p key={list.id} onClick={this.onClick.bind(this, "list", {list_id: list.id})} data-type="list" data-slug={{id: list.id}}>{list.name}</p>
         })}
       </div>
     </div>;
   },
 
-  onClick(ev) {
-    var node = ev.currentTarget;
-    var type = node.getAttribute('data-type');
-    var args = node.getAttribute('data-slug');
+  onClick(type, args, ev) {
     this.getFlux().actions.changeTimeline(type, args);
   }
 })

@@ -7,42 +7,34 @@ import ContextMenu from "./context_menu.jsx";
 import ModalWindow from "./modal_window.jsx";
 
 export default React.createClass({
-  mixins: [Fluxxor.FluxMixin(React)],
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('twitterAccount'),
+  ],
 
   getInitialState() {
-    return {
-      knownNames: ["aa808", "uu59"],
-      lists: []
-    }
+    return {};
   },
 
-  store() {
-    return this.getFlux().store('twitterAccount');
+  getStateFromFlux() {
+    var store = this.getFlux().store('twitterAccount');
+    return store.getState();
   },
 
   componentDidMount() {
-    this.updateLists();
-    this.store().on('change', ()=>{
-      this.updateLists();
-    });
-  },
-
-  updateLists() {
-    this.store().client.lists().then((lists) => {
-      this.setState({lists: lists});
-    });
+    this.getFlux().actions.initialLoad(this.state.currentUser);
   },
 
   render() {
     return <div className="container" onClick={this.onClick}>
       <div className="container--sidebar">
-        <Sidebar knownNames={this.state.knownNames} />
+        <Sidebar userNames={this.state.userNames} />
       </div>
       <div className="container--channels">
-        <Channels lists={this.state.lists} screenName={this.props.screenName} />
+        <Channels client={this.state.client} />
       </div>
       <div className="container--main">
-        <Main screenName={this.props.screenName} />
+        <Main currentUser={this.state.currentUser} />
       </div>
       <ContextMenu />
       <ModalWindow />

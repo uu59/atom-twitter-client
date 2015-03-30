@@ -1,4 +1,8 @@
 export default {
+  initialLoad(initialAccount) {
+    this.dispatch('changeCurrentUser', initialAccount);
+  },
+
   contextMenuSet: function(items) {
     this.dispatch('contextMenuSet', items);
   },
@@ -16,8 +20,7 @@ export default {
   },
 
   changeTimeline(type, args) {
-    console.log('changeTimeline on action', type, args)
-    this.dispatch('changeTimeline', [type, args]);
+    this.dispatch('changeTimeline', {type: type, args: args});
   },
 
   updateStatus(status) {
