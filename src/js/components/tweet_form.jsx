@@ -18,7 +18,7 @@ export default React.createClass({
 
   render() {
     var replyTo = this.props.replyTo;
-    return <form className="timeline__form" onSubmit={this.onSubmit}>
+    return <form className="postform" onSubmit={this.onSubmit}>
       {replyTo ? <p>Reply to: {`@${replyTo.user.screen_name}\n${replyTo.text}`}</p> : ""}
       <textarea placeholder={`Post from @${this.state.client.user}`} type="text" name="status" onKeyUp={this.onTextChange}>{this.state.status}</textarea>
       <p>
