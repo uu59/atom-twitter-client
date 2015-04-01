@@ -8,6 +8,7 @@ import ModalWindowStore from "./stores/modal_window.es6";
 import TwitterAccountStore from "./stores/twitter_account.es6";
 import TwitterListsStore from "./stores/twitter_lists.es6";
 import TimelineStore from "./stores/timeline.es6";
+import ChannelSearchesStore from "./stores/channel_searches.es6";
 
 import TwitterClient from "./lib/twitter_client.es6";
 
@@ -20,6 +21,7 @@ var stores = {
   contextmenu: new ContextMenuStore(),
   twitterAccount: new TwitterAccountStore(acc),
   twitterLists: new TwitterListsStore(),
+  channelSearch: new ChannelSearchesStore(acc),
   timeline: new TimelineStore(new TwitterClient(acc)),
   modalWindow: new ModalWindowStore()
 };

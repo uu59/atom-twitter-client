@@ -31,7 +31,7 @@ export default React.createClass({
         <Sidebar userNames={this.state.userNames} />
       </div>
       <div className="container--channels">
-        <Channels client={this.state.client} />
+        <Channels currentUser={this.state.currentUser} />
       </div>
       <div className="container--main">
         <Main currentUser={this.state.currentUser} />

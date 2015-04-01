@@ -24,7 +24,12 @@ export default {
   },
 
   searchTwitter(params = {}) {
+    this.dispatch('searchTwitter', params.q)
     this.dispatch('changeTimeline', {type: "search", args: params});
+  },
+
+  channelSearchClose(q) {
+    this.dispatch('channelSearchClose', q)
   },
 
   updateStatus(status) {

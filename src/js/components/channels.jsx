@@ -2,6 +2,8 @@ import Fluxxor from "fluxxor";
 import React from "react";
 import _ from "lodash";
 
+import ChannelsSearch from "./channels_search.jsx";
+
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
@@ -21,23 +23,14 @@ export default React.createClass({
   render() {
     return <div className="channel">
       <section className="channel__fixed">
-        <h1>ch</h1>
-        <p onClick={this.onClick.bind(this, "home", {})} data-type="home">Home</p>
+        <h1>Channels</h1>
+        <p onClick={this.onClick.bind(this, "home", {})}>Home</p>
+        <p onClick={this.onClickMentions.bind(this, "mentions", {})}>@{this.props.currentUser}</p>
+        <p>DM(TODO)</p>
       </section>
-      <section className="channel__searches">
-        <h1>search</h1>
-        <form onSubmit={this.onSubmitSearch}>
-          <input type="text" name="q" />
-        </form>
-        {this.state.searches.map((q) => {
-          return <p key={q}>
-            <span onClick={this.doSearch.bind(this, q)}>{q}</span>
-            <i className="el el-remove" onClick={this.onClickSearchClose.bind(this, q)}></i>
-          </p>
-        })}
-      </section>
+      <ChannelsSearch />
       <section className="channel__lists">
-        <h1>lists</h1>
+        <h1>Lists</h1>
         {this.state.lists.map((list) => {
           var slug = `@${this.props.currentUser}/${list.slug}`;
           return <p key={list.id} onClick={this.onClick.bind(this, "list", {list_id: list.id})} data-type="list" data-slug={{id: list.id}}>{list.name}</p>
@@ -48,6 +41,10 @@ export default React.createClass({
 
   onClick(type, args, ev) {
     this.getFlux().actions.changeTimeline(type, args);
+  },
+
+  onClickMentions(ev) {
+    this.getFlux().actions.changeTimeline("mentions");
   },
 
   onSubmitSearch(ev) {

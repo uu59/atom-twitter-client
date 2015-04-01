@@ -55,6 +55,11 @@ export default class TwitterClient {
     return this.request("/statuses/home_timeline.json", "GET", _.merge(defaultParams, params));
   }
 
+  mentions(params = {}) {
+    var defaultParams = { count: 100, include_entities: "true" };
+    return this.request("/statuses/mentions_timeline.json", "GET", _.merge(defaultParams, params));
+  }
+
   updateStatus(params = {}){
     return this.request("/statuses/update.json", "POST", params);
   }
