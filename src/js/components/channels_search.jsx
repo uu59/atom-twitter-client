@@ -8,8 +8,7 @@ export default React.createClass({
   ],
 
   getInitialState() {
-    return {
-    }
+    return {};
   },
 
   getStateFromFlux() {

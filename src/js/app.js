@@ -6,8 +6,8 @@ import Application from "./components/application.jsx";
 import ContextMenuStore from "./stores/context_menu.es6";
 import ModalWindowStore from "./stores/modal_window.es6";
 import TwitterAccountStore from "./stores/twitter_account.es6";
-import TwitterListsStore from "./stores/twitter_lists.es6";
 import TimelineStore from "./stores/timeline.es6";
+import ChannelListsStore from "./stores/channel_lists.es6";
 import ChannelSearchesStore from "./stores/channel_searches.es6";
 
 import TwitterClient from "./lib/twitter_client.es6";
@@ -20,7 +20,7 @@ var acc = "uu59";
 var stores = {
   contextmenu: new ContextMenuStore(),
   twitterAccount: new TwitterAccountStore(acc),
-  twitterLists: new TwitterListsStore(),
+  channelList: new ChannelListsStore(),
   channelSearch: new ChannelSearchesStore(acc),
   timeline: new TimelineStore(new TwitterClient(acc)),
   modalWindow: new ModalWindowStore()

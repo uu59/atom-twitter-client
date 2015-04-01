@@ -3,21 +3,15 @@ import React from "react";
 import _ from "lodash";
 
 import ChannelsSearch from "./channels_search.jsx";
+import ChannelsList from "./channels_list.jsx";
 
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
-    Fluxxor.StoreWatchMixin('twitterLists')
   ],
 
   getInitialState() {
-    return {
-      searches: []
-    }
-  },
-
-  getStateFromFlux() {
-    return this.getFlux().store('twitterLists').getState();
+    return { }
   },
 
   render() {
@@ -29,13 +23,7 @@ export default React.createClass({
         <p>DM(TODO)</p>
       </section>
       <ChannelsSearch />
-      <section className="channel__lists">
-        <h1>Lists</h1>
-        {this.state.lists.map((list) => {
-          var slug = `@${this.props.currentUser}/${list.slug}`;
-          return <p key={list.id} onClick={this.onClick.bind(this, "list", {list_id: list.id})} data-type="list" data-slug={{id: list.id}}>{list.name}</p>
-        })}
-      </section>
+      <ChannelsList currentUser={this.props.currentUser} />
     </div>;
   },
 
@@ -47,24 +35,5 @@ export default React.createClass({
     this.getFlux().actions.changeTimeline("mentions");
   },
 
-  onSubmitSearch(ev) {
-    ev.preventDefault();
-    var form = ev.currentTarget;
-    this.doSearch(form.q.value);
-  },
-
-  onClickSearchClose(q, ev) {
-    console.log(arguments);
-    this.setState({
-      searches: _.remove(this.state.searches, q)
-    });
-  },
-
-  doSearch(q) {
-    this.getFlux().actions.searchTwitter({q: q});
-    this.setState({
-      searches: _.uniq(this.state.searches.concat(q))
-    });
-  },
 })
 
