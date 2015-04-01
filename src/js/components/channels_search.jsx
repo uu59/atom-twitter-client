@@ -16,7 +16,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log("a", this.state);
     return <section className="channel__searches">
       <h1>Search</h1>
       <form onSubmit={this.onSubmitSearch}>

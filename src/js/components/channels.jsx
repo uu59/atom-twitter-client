@@ -4,6 +4,7 @@ import _ from "lodash";
 
 import ChannelsSearch from "./channels_search.jsx";
 import ChannelsList from "./channels_list.jsx";
+import ChannelsUserTimeline from "./channels_user_timeline.jsx";
 
 export default React.createClass({
   mixins: [
@@ -22,8 +23,9 @@ export default React.createClass({
         <p onClick={this.onClickMentions.bind(this, "mentions", {})}>@{this.props.currentUser}</p>
         <p>DM(TODO)</p>
       </section>
-      <ChannelsSearch />
       <ChannelsList currentUser={this.props.currentUser} />
+      <ChannelsUserTimeline />
+      <ChannelsSearch />
     </div>;
   },
 

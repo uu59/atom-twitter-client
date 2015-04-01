@@ -21,6 +21,9 @@ export default {
 
   changeTimeline(type, args) {
     this.dispatch('changeTimeline', {type: type, args: args});
+    if(type === "user") {
+      this.dispatch('displayUserTimeline', args.screen_name);
+    }
   },
 
   searchTwitter(params = {}) {
@@ -30,6 +33,14 @@ export default {
 
   channelSearchClose(q) {
     this.dispatch('channelSearchClose', q)
+  },
+
+  channelUserTimelineClose(user) {
+    this.dispatch('channelUserTimelineClose', user)
+  },
+
+  displayUserTimeline(user) {
+    this.dispatch("displayUserTimeline", user);
   },
 
   updateStatus(status) {
