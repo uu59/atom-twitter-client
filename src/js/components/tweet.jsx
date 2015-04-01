@@ -43,7 +43,7 @@ export default React.createClass({
     });
     (entities.user_mentions || []).forEach( (mention) => {
       var m = `@${mention.screen_name}`
-      html = html.replace(m, `<strong>${m}</strong>`);
+      html = html.replace(m, `<strong class="tweetBody__screenName">${m}</strong>`);
     });
     html = html.replace(new RegExp("\n","g"), '<br />');
     return html;
