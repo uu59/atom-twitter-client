@@ -1,7 +1,12 @@
 .container--channels
   background-color #efede0
   padding: 0 1em
-  .channel
+  .channel--current
+    color: #000
+    font-weight bold
+  .channels
+    > *
+      margin-bottom 2em
     h1
       margin 0
       padding 0
@@ -9,14 +14,14 @@
       clickable()
       &:hover
         color: #000
-    > *
-      margin-bottom 2em
     p
       cursor: pointer
       margin: 0
       padding: 0.5ex 0
       &:hover
         color: #793
+    .el
+      color: #888
     &__searches
       form
         margin: 0

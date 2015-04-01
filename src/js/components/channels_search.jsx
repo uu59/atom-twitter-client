@@ -18,15 +18,24 @@ export default React.createClass({
     return this.getFlux().store('channelSearch').getState();
   },
 
+  timelineClassName(q) {
+    console.log(this.props.currentTimeline);
+    if(this.props.currentTimeline.type === "search" && this.props.currentTimeline.args.q === q) {
+      return "channel--current";
+    } else {
+      return "channel";
+    }
+  },
+
   render() {
-    return <section className="channel__searches">
+    return <section className="channels__searches">
       <h1 onClick={this.toggleChannel}>Search</h1>
       <section style={this.channelStyle()}>
         <form onSubmit={this.onSubmitSearch}>
           <input type="text" name="q" />
         </form>
         {this.state.searches.map((q) => {
-          return <p key={`search--${q}`}>
+          return <p key={`search--${q}`} className={this.timelineClassName(q)}>
             <span onClick={this.doSearch.bind(this, q)}>{q}</span>
             <i className="el el-remove" onClick={this.onClickSearchClose.bind(this, q)}></i>
           </p>

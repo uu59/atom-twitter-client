@@ -18,12 +18,20 @@ export default React.createClass({
     return this.getFlux().store('channelUserTimelines').getState();
   },
 
+  timelineClassName(screen_name) {
+    if(this.props.currentTimeline.type === "user" && this.props.currentTimeline.args.screen_name === screen_name) {
+      return "channel--current";
+    } else {
+      return "channel";
+    }
+  },
+
   render() {
-    return <section className="channel__userTimelines" style={this.state.userTimelines.length === 0 ? {display: "none"} : {}}>
+    return <section className="channels__userTimelines" style={this.state.userTimelines.length === 0 ? {display: "none"} : {}}>
       <h1 onClick={this.toggleChannel}>Users</h1>
       <section style={this.channelStyle()}>
       {this.state.userTimelines.map((user) => {
-        return <p key={user}>
+        return <p key={user} className={this.timelineClassName(user)}>
           <span onClick={this.onClickName.bind(this, user)}>@{user}</span>
           <i className="el el-remove" onClick={this.onClickClose.bind(this, user)}></i>
         </p>;

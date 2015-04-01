@@ -9,23 +9,39 @@ import ChannelsUserTimeline from "./channels_user_timeline.jsx";
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('timeline'),
   ],
 
   getInitialState() {
     return { }
   },
 
+  getStateFromFlux() {
+    var state = this.getFlux().store('timeline');
+    return {
+      currentTimeline: {type: state.type, args: state.args},
+    };
+  },
+
+  timelineClassName(type) {
+    if(this.state.currentTimeline.type === type) {
+      return "channel--current";
+    }else{
+      return "channel";
+    }
+  },
+
   render() {
-    return <div className="channel">
-      <section className="channel__fixed">
+    return <div className="channels">
+      <section className="channels__fixed">
         <h1>Channels</h1>
-        <p onClick={this.onClick.bind(this, "home", {})}>Home</p>
-        <p onClick={this.onClickMentions.bind(this, "mentions", {})}>@{this.props.currentUser}</p>
+        <p className={this.timelineClassName("home")} onClick={this.onClick.bind(this, "home", {})}>Home</p>
+        <p className={this.timelineClassName("mentions")} onClick={this.onClickMentions.bind(this, "mentions", {})}>@{this.props.currentUser}</p>
         <p>DM(TODO)</p>
       </section>
-      <ChannelsList currentUser={this.props.currentUser} />
-      <ChannelsUserTimeline />
-      <ChannelsSearch />
+      <ChannelsList currentTimeline={this.state.currentTimeline} currentUser={this.props.currentUser} />
+      <ChannelsUserTimeline currentTimeline={this.state.currentTimeline} />
+      <ChannelsSearch currentTimeline={this.state.currentTimeline} />
     </div>;
   },
 
