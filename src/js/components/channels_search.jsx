@@ -41,7 +41,6 @@ export default React.createClass({
   },
 
   onClickSearchClose(q, ev) {
-    console.log(arguments);
     this.getFlux().actions.channelSearchClose(q);
   },
 

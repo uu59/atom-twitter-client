@@ -24,8 +24,7 @@ export default Fluxxor.createStore({
   },
 
   append(q) {
-    console.log("append", q);
-    this.searches.push(q);
+    this.searches = _.uniq(this.searches.concat(q));
     this.persist();
     this.emit('change');
   },
