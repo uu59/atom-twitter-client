@@ -31,7 +31,6 @@
     "babel": "^4.7.5",
     "babelify": "^5.0.4",
     "brfs": "^1.4.0",
-    "browser-request": "^0.3.3",
     "browserify": "^9.0.3",
     "coffee-script": "^1.9.1",
     "envify": "^3.4.0",

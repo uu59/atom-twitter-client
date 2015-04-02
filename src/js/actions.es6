@@ -1,6 +1,15 @@
+import Storage from './lib/storage.es6';
+
 export default {
   initialLoad(initialAccount) {
     this.dispatch('changeCurrentUser', initialAccount);
+  },
+
+  registerAccountTokens(params) {
+    Storage.set(`token--${params.screenName}`, JSON.stringify(params.tokens));
+    var users = JSON.parse(Storage.get('users') || "[]");
+    users.push(params.screenName);
+    Storage.set('users', JSON.stringify(users));
   },
 
   contextMenuSet: function(items) {

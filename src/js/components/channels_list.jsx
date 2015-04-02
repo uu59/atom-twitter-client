@@ -28,7 +28,7 @@ export default React.createClass({
 
   render() {
     return <section className="channels__lists">
-      <h1 onClick={this.toggleChannel}>Lists</h1>
+      <h1 onClick={this.toggleChannel}>Lists<small>({this.state.lists.length})</small></h1>
       <section style={this.channelStyle()}>
         {this.state.lists.map((list) => {
           var slug = `@${this.props.currentUser}/${list.slug}`;

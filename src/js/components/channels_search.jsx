@@ -29,7 +29,7 @@ export default React.createClass({
 
   render() {
     return <section className="channels__searches">
-      <h1 onClick={this.toggleChannel}>Search</h1>
+      <h1 onClick={this.toggleChannel}>Search<small>({this.state.searches.length})</small></h1>
       <section style={this.channelStyle()}>
         <form onSubmit={this.onSubmitSearch}>
           <input type="text" name="q" />

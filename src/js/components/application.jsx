@@ -28,7 +28,7 @@ export default React.createClass({
   render() {
     return <div className="container" onClick={this.onClick}>
       <div className="container--sidebar">
-        <Sidebar userNames={this.state.userNames} />
+        <Sidebar client={this.state.client} userNames={this.state.userNames} />
       </div>
       <div className="container--channels">
         <Channels currentUser={this.state.currentUser} />

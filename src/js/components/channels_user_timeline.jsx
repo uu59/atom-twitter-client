@@ -28,7 +28,7 @@ export default React.createClass({
 
   render() {
     return <section className="channels__userTimelines" style={this.state.userTimelines.length === 0 ? {display: "none"} : {}}>
-      <h1 onClick={this.toggleChannel}>Users</h1>
+      <h1 onClick={this.toggleChannel}>Users<small>({this.state.userTimelines.length})</small></h1>
       <section style={this.channelStyle()}>
       {this.state.userTimelines.map((user) => {
         return <p key={user} className={this.timelineClassName(user)}>

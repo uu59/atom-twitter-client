@@ -1,5 +1,6 @@
 import _ from "lodash";
 import Promise from 'bluebird';
+import Qs from "qs";
 import superagent from "superagent";
 import oauth from './oauth.es6';
 import Storage from './storage.es6';
@@ -44,6 +45,58 @@ export default class TwitterClient {
         }
       });
     });
+  }
+
+  authenticateUrl() {
+    return new Promise(function(resolve, reject){
+      var req = {
+        url: "https://api.twitter.com/oauth/request_token",
+        method: "POST"
+      };
+      var a = oauth.authorize(req);
+      superagent[req.method.toLowerCase()](req.url)
+        .set(oauth.toHeader(a))
+        .end(function(err, response){
+          if(err) {
+            reject(err, response);
+          } else {
+            var params = Qs.parse(response.text);
+            var url = "https://api.twitter.com/oauth/authorize?oauth_token=" + params.oauth_token;
+            resolve({url: url, params: params, resolve: response});
+          }
+        });
+    });
+  }
+
+  authenticate(pin, params){
+    return new Promise(function(resolve, reject){
+      var req = {
+        url: "https://api.twitter.com/oauth/access_token",
+        method: "POST",
+        data: {
+          oauth_verifier: pin
+        }
+      };
+      var a = oauth.authorize(req, {public: params.oauth_token, secret: params.oauth_token_secret});
+      superagent[req.method.toLowerCase()](req.url, a)
+        .set(oauth.toHeader(a))
+        .end(function(err, response){
+          if(err) {
+            reject(err, response);
+          } else {
+            var params = Qs.parse(response.text);
+            var tokens = {
+              consumer: oauth.consumer,
+              access: {
+                public: params.oauth_token,
+                secret: params.oauth_token_secret
+              }
+            };
+            resolve({tokens: tokens, screenName: params.screen_name});
+          }
+        });
+    });
+
   }
 
   rateLimit() {
