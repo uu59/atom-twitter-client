@@ -1,11 +1,28 @@
 .container--sidebar
   background-color: #393939
   .sidebar
+    display flex
+    flex-direction: column
+    height 100%
     text-align: center
-    p
+    &__account
       margin: 0
       padding-bottom 1em
+      flex: 0 1 auto
     img
       width: 32px
       height: 32px
       cursor: pointer
+    &__plus
+      flex: 1 1 auto
+      position relative
+      .el
+        clickable()
+        display: block
+        height 48px
+        width 48px
+        position absolute
+        bottom -12px
+        left 0
+        &:hover
+          color #fff
