@@ -10,7 +10,7 @@ export default React.createClass({
       {this.props.userNames.map( (n) =>{
         var className = (n === currentUser ? "sidebar__account--current" : "sidebar__account");
         return <p className={className} key={n} onClick={this.onClickName} data-screen-name={n}>
-          <img src={`http://twiticon.herokuapp.com/${n}`} alt={n} title={n} />
+          <img width="32px" height="32px" src={`http://twiticon.herokuapp.com/${n}`} alt={n} title={n} />
         </p>;
       })}
       <p className="sidebar__plus" onClick={this.onClickPlus}>
