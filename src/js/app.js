@@ -15,8 +15,6 @@ import TwitterClient from "./lib/twitter_client.es6";
 
 import actions from "./actions.es6";
 
-// require('./oauth.js');
-
 var acc = "uu59";
 var stores = {
   contextmenu: new ContextMenuStore(),
