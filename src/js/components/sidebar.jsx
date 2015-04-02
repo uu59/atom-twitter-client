@@ -5,9 +5,11 @@ export default React.createClass({
   mixins: [Fluxxor.FluxMixin(React)],
 
   render() {
+    var currentUser = this.props.client.user;
     return <div className="sidebar">
       {this.props.userNames.map( (n) =>{
-        return <p className="sidebar__account" key={n} onClick={this.onClickName} data-screen-name={n}>
+        var className = (n === currentUser ? "sidebar__account--current" : "sidebar__account");
+        return <p className={className} key={n} onClick={this.onClickName} data-screen-name={n}>
           <img src={`http://twiticon.herokuapp.com/${n}`} alt={n} title={n} />
         </p>;
       })}
