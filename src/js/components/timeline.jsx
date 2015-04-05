@@ -4,6 +4,7 @@ import _ from "lodash";
 
 import Tweet from "./tweet.jsx";
 import TweetForm from "./tweet_form.jsx";
+import Conversation from "./conversation.jsx";
 
 export default React.createClass({
   mixins: [
@@ -27,7 +28,10 @@ export default React.createClass({
       <div className={className}>
         {
           this.state.tweets.map((tweet) => {
-            return <Tweet key={tweet.id} tweet={tweet} />;
+            var key = `tweet-${tweet.id_str}`;
+            return <div>
+              <Tweet key={key} tweet={tweet} />
+            </div>
           })
         }
         {

@@ -29,4 +29,7 @@ export default Fluxxor.createStore({
     this.currentUser = user;
     this.emit('change');
   },
+
+  tweetConversationShow(id) {
+  },
 });

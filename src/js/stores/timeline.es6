@@ -6,12 +6,14 @@ export default Fluxxor.createStore({
   actions: {
     "changeCurrentUser": "changeCurrentUser",
     "changeTimeline": "changeTimeline",
+    "tweetConversationShow": "fetchConversations",
   },
 
   initialize(type, args = {}) {
     this.type = type || "home";
     this.args = args;
     this.tweets = [];
+    this.knownConversations = {};
     this.loading = false;
   },
 
@@ -20,9 +22,17 @@ export default Fluxxor.createStore({
       user: (this.client && this.client.user),
       type: this.type,
       args: this.args,
+      conversations: this.knownConversations,
       loading: this.loading,
       tweets: this.tweets,
     };
+  },
+
+  fetchConversations(id) {
+    this.client.conversations({id: id}).then((conversations) => {
+      this.knownConversations[id] = conversations;
+    });
+    this.emit("emit");
   },
 
   fetchTweets(params = {}) {

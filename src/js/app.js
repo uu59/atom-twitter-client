@@ -10,6 +10,7 @@ import TimelineStore from "./stores/timeline.es6";
 import ChannelListsStore from "./stores/channel_lists.es6";
 import ChannelSearchesStore from "./stores/channel_searches.es6";
 import ChannelUserTimelinesStore from "./stores/channel_user_timelines.es6";
+import ConversationStore from "./stores/conversation.es6";
 
 import TwitterClient from "./lib/twitter_client.es6";
 
@@ -23,6 +24,7 @@ var stores = {
   channelSearch: new ChannelSearchesStore(acc),
   channelUserTimelines: new ChannelUserTimelinesStore(acc),
   timeline: new TimelineStore(new TwitterClient(acc)),
+  conversation: new ConversationStore(acc),
   modalWindow: new ModalWindowStore()
 };
 

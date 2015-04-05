@@ -40,6 +40,10 @@ export default {
     this.dispatch('changeTimeline', {type: "search", args: params});
   },
 
+  tweetConversationShow(id) {
+    this.dispatch('tweetConversationShow', id);
+  },
+
   channelSearchClose(q) {
     this.dispatch('channelSearchClose', q)
   },

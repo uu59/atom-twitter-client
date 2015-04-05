@@ -19,7 +19,6 @@ export default React.createClass({
   },
 
   timelineClassName(q) {
-    console.log(this.props.currentTimeline);
     if(this.props.currentTimeline.type === "search" && this.props.currentTimeline.args.q === q) {
       return "channel--current";
     } else {

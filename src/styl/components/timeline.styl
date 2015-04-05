@@ -11,7 +11,7 @@ formHeight = 100px
     position fixed
     right 24px
     left layoutSidebarWidth + layoutChannelsWidth
-    z-index 2
+    z-index zIndexPostform
     margin 0
     padding layoutPadding 1em 0 1em
     box-sizing border-box
@@ -29,53 +29,3 @@ formHeight = 100px
       top 50%
       left 50%
       color #c0c9c0
-  .tweet
-    padding 1ex 0
-    display table
-    width 100%
-    border-bottom 1px solid #f0f0f0
-    .tweet__userimage
-      img
-        width 32px
-        height 32px
-    .tweet__media
-      max-width 160px
-      max-height 160px
-      display inline-block
-      padding-right 1ex
-    .tweet__protectedIcon
-      font-size: 9px
-      color: #666
-    .tweet__userimage
-      display table-cell
-      width 36px
-    .tweetBody
-      display table-cell
-      vertical-align top
-      word-break: break-word
-      p
-        margin 0
-        padding 0
-      &__timestamp
-        float: right
-        font-family: monospace
-        subtle-link()
-      &__userName
-        padding-left: 1ex
-      &__screenName
-        clickable()
-      &__source
-        a
-          subtle-link()
-      &__social
-        color: #998
-        > em
-          padding-right: 1ex
-    .tweet__retweet
-      img
-        width: 16px
-        height: 16px
-
-  .tweet--selected
-    @extend .timeline .tweet
-    background-color #e9e9e9

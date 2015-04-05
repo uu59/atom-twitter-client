@@ -150,4 +150,11 @@ export default class TwitterClient {
     var defaultParams = { count: 100, include_entities: "true", include_rts: "true" };
     return this.request("/statuses/user_timeline.json", "GET", _.merge(defaultParams, params));
   }
+
+  // undocumented
+  conversations(params = {}) {
+    var defaultParams = { count: 100, include_entities: "true"};
+    console.log(_.merge(defaultParams, params));
+    return this.request("/conversation/show.json", "GET", _.merge(defaultParams, params));
+  }
 }
