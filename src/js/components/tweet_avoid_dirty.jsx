@@ -16,18 +16,9 @@ import Conversation from "./conversation.jsx";
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
-    Fluxxor.StoreWatchMixin('twitterAccount')
   ],
 
-  twitter() {
-    return this.getFlux().store('twitterAccount');
-  },
-
   getInitialState() {
-    return {};
-  },
-
-  getStateFromFlux() {
     return {};
   },
 
@@ -116,7 +107,7 @@ export default React.createClass({
 
   itemRetweet(tweet) {
     var id = tweet.retweeted_status ? tweet.retweeted_status.id_str : tweet.id_str;
-    this.twitter().client.retweet(id);
+    this.getFlux().actions.tweetRetweet(id);
   },
 
   itemConversation(tweet) {

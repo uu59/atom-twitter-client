@@ -6,11 +6,16 @@ export default Fluxxor.createStore({
   actions: {
     "changeCurrentUser": "changeCurrentUser",
     "updateStatus": "updateStatus",
+    "retweetThis": "retweet",
   },
 
   initialize(screenName = null) {
     this.userNames = Storage.users();
     this.currentUser = screenName || this.userNames[0];
+    this.setupClient();
+  },
+
+  setupClient() {
     this.client = new TwitterClient(this.currentUser);
   },
 
@@ -27,9 +32,11 @@ export default Fluxxor.createStore({
 
   changeCurrentUser(user) {
     this.currentUser = user;
+    this.setupClient();
     this.emit('change');
   },
 
-  tweetConversationShow(id) {
+  retweet(id) {
+    this.client.retweet(id);
   },
 });
