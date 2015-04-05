@@ -83,10 +83,6 @@ export default React.createClass({
     });
   },
 
-  onSelect(ev) {
-    // select(ev.currentTarget)
-  },
-
   itemCopyText(tweet) {
     console.log('item copy text', tweet.text);
     clipboard.writeText(tweet.text);
