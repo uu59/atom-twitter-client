@@ -43,7 +43,7 @@ export default React.createClass({
     });
     (entities.user_mentions || []).forEach( (mention) => {
       var m = `@${mention.screen_name}`
-      html = html.replace(m, `<strong class="tweetBody__screenName">${m}</strong>`);
+      html = html.replace(m, `<strong onClick={this.onClickUserName} data-screenName="${mention.screen_name}" class="tweetBody__screenName">${m}</strong>`);
     });
     html = html.replace(new RegExp("\n","g"), '<br />');
     return html;
@@ -113,12 +113,49 @@ export default React.createClass({
   },
 
   itemUserInfo(tweet) {
-    console.log('itemUserInfo clicked', tweet, tweet.user.screen_name);
-    this.getFlux().actions.changeTimeline("user", {screen_name: tweet.user.screen_name});
+    this.openUser(tweet.user.screen_name);
   },
 
   onClickAuthorName(ev) {
-    this.itemUserInfo(this.props.tweet.retweeted_status || this.props.tweet);
+    var target = this.props.tweet.retweeted_status || this.props.tweet;
+    this.openUser(target.user.screen_name);
+  },
+
+  onClickUserName(ev) {
+    var user = ev.currentTarget.getAttribute('data-screenName');
+    this.openUser(user);
+  },
+
+  openUser(screenName) {
+    this.getFlux().actions.changeTimeline("user", {screen_name: screenName});
+  },
+
+  eventListenFromHTML(el) {
+    this._listners = [];
+    Array.prototype.splice.call(el.querySelectorAll('*[onclick]'), 0).forEach((node) => {
+      var handlerName = node.getAttribute('onclick').replace(new RegExp("^\{|\}$", "g"), "");
+      var handler = eval(handlerName);
+      var listener = function(ev) {
+        if(ev.currentTarget !== node) return;
+        handler.call(node, ev);
+      };
+      node.addEventListener('click', listener);
+      this._listners.push({node: node, listen: "click", listener: listener});
+    }.bind(this));
+  },
+
+  componentDidMount() {
+    var el = React.findDOMNode(this.refs.tweet);
+    this.eventListenFromHTML(el);
+  },
+
+  componentWillUnmount() {
+    // remove event listners assigned from `eventListenFromHTML`
+    if(!this._listners) return;
+    this._listners.forEach((container) => {
+      container.node.removeEventListener(container.listen, container.listener);
+    });
+    this._listners = null;
   },
 
   render() {
@@ -130,7 +167,7 @@ export default React.createClass({
     };
     var protectedIcon = (mainTweet.user.protected ? <i className="tweet__protectedIcon el el-lock" /> : "");
     var url = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
-    return <div className="tweet" onContextMenu={onContext}>
+    return <div className="tweet" onContextMenu={onContext} ref="tweet">
       <div className="tweet__userimage">
         <img src={mainTweet.user.profile_image_url} />
       </div>
