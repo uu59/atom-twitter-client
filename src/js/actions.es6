@@ -44,6 +44,10 @@ export default {
     this.dispatch('retweetThis', id);
   },
 
+  tweetRemove(id) {
+    this.dispatch('removeThis', id);
+  },
+
   tweetConversationShow(id) {
     this.dispatch('tweetConversationShow', id);
   },

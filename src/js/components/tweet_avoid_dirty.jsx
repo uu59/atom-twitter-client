@@ -78,6 +78,7 @@ export default React.createClass({
           label: `@${tweet.retweeted_status.user.screen_name}`, action: (ev) => this.itemUserInfo(tweet.retweeted_status),
         }),
         {label: "会話を表示", action: (ev) => this.itemConversation(tweet) },
+        {label: "削除", action: (ev) => this.itemRemove(tweet) },
       ]
     });
   },
@@ -108,6 +109,11 @@ export default React.createClass({
   itemRetweet(tweet) {
     var id = tweet.retweeted_status ? tweet.retweeted_status.id_str : tweet.id_str;
     this.getFlux().actions.tweetRetweet(id);
+  },
+
+  itemRemove(tweet) {
+    var id = tweet.id_str;
+    this.getFlux().actions.tweetRemove(id);
   },
 
   itemConversation(tweet) {

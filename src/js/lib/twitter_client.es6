@@ -151,6 +151,10 @@ export default class TwitterClient {
     return this.request("/statuses/user_timeline.json", "GET", _.merge(defaultParams, params));
   }
 
+  destroy(id) {
+    return this.request(`/statuses/destroy/${id}.json`, "POST");
+  }
+
   // undocumented
   conversations(params = {}) {
     var defaultParams = { count: 100, include_entities: "true"};
