@@ -1,6 +1,9 @@
 import Fluxxor from "fluxxor";
 import React from "react";
 
+import * as foo from "./tweet.jsx";
+var Tweet = foo.factory();
+
 export default React.createClass({
   mixins: [
     Fluxxor.FluxMixin(React),
@@ -19,7 +22,7 @@ export default React.createClass({
   render() {
     var replyTo = this.props.replyTo;
     return <form className="postform" onSubmit={this.onSubmit}>
-      {replyTo ? <p>Reply to: {`@${replyTo.user.screen_name}\n${replyTo.text}`}</p> : ""}
+      {replyTo ? <Tweet key={`form-${replyTo.id_str}`} tweet={replyTo} /> : ""}
       <textarea placeholder={`Post from @${this.state.client.user}`} type="text" name="status" onKeyUp={this.onTextChange} defaultValue={this.state.status} />
       <p>
         <input type="hidden" name="inReplyTo" value={replyTo && replyTo.id_str} />

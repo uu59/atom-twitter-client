@@ -1,8 +1,8 @@
 import Fluxxor from "fluxxor";
 import React from "react";
 import TweetForm from "./tweet_form.jsx";
-import Tweet from "./tweet_avoid_dirty.jsx";
-import Dummy from "./dummy.jsx";
+import * as foo from "./tweet.jsx";
+var Tweet = foo.factory();
 
 export default React.createClass({
   mixins: [
@@ -22,7 +22,6 @@ export default React.createClass({
   render() {
     var conversations = this.state.conversation || [
     ];
-    console.log(conversations);
     return <div className="tweets">
       {
         conversations.map((tweet) => {
