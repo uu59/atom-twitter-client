@@ -170,6 +170,9 @@ function reactFactory() {
       var onContext = (ev) => {
         this.onContextmenu(ev, tweet);
       };
+      var onClickShowConversation = (ev) => {
+        this.itemConversation(mainTweet);
+      };
       var protectedIcon = (mainTweet.user.protected ? <i className="tweet__protectedIcon el el-lock" /> : "");
       var url = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
       return <div className="tweet" onContextMenu={onContext} ref="tweet">
@@ -195,6 +198,7 @@ function reactFactory() {
               ""
             }
           </div>
+          {mainTweet.in_reply_to_status_id ? <small className="tweetBody__showConversation" onClick={onClickShowConversation}><i className="el el-list-alt" />会話を表示</small> : ""}
           <small className="tweetBody__source" dangerouslySetInnerHTML={{__html: mainTweet.source.replace("<a", '<a target="blank"')}} />
           {tweet.retweeted_status ? this.renderRetweet(tweet) : ""}
         </div>
