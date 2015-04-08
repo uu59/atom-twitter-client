@@ -22,9 +22,12 @@ export default Fluxxor.createStore({
   },
 
   fetchConversations(id) {
+    this.conversation = [];
+    this.loading = true;
+    this.emit("change");
     this.client.conversations({id: id}).then((tweets) => {
       this.conversation = tweets;
-      console.log("fetched");
+      this.loading = false;
       this.emit("change");
     });
   },

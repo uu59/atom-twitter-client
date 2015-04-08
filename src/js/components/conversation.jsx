@@ -20,8 +20,7 @@ export default React.createClass({
   },
 
   render() {
-    var conversations = this.state.conversation || [
-    ];
+    var conversations = this.state.conversation || [];
     return <div className="tweets">
       {
         conversations.map((tweet) => {
