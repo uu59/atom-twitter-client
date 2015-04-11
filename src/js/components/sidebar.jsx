@@ -13,8 +13,8 @@ export default React.createClass({
           <img width="32px" height="32px" src={`http://twiticon.herokuapp.com/${n}`} alt={n} title={n} />
         </p>;
       })}
-      <p className="sidebar__plus" onClick={this.onClickPlus}>
-        <i className="el el-plus" />
+      <p className="sidebar__plus">
+        <i className="el el-plus" onClick={this.onClickPlus} />
       </p>
     </div>;
   },
