@@ -1,0 +1,320 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+body {
+  color: #666;
+  font-size: small;
+  background-color: #f8f7f1;
+}
+body * {
+  letter-spacing: normal;
+}
+em {
+  font-style: normal;
+}
+a {
+  color: #9ebe77;
+}
+.container {
+  width: 100%;
+  display: flex;
+  align-content: stretch;
+}
+.container .container--sidebar {
+  min-width: 48px;
+  padding-top: 16px;
+  flex: 0 1 auto;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+.container .container--channels {
+  min-width: 180px;
+  padding-top: 16px;
+  flex: 0 1 auto;
+  align-self: stretch;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+}
+.container .container--main {
+  flex: 0 1 auto;
+  align-self: stretch;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+.main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main .postform {
+  flex: 0 1 auto;
+}
+.main .userHeader {
+  flex: 0 1 auto;
+}
+.main .timeline {
+  flex: 1 1 auto;
+}
+.container--channels {
+  background-color: #efede0;
+  padding: 0 1em;
+}
+.container--channels .channel--current {
+  background-color: rgba(0,100,80,0.05);
+}
+.container--channels .channels > * {
+  margin-bottom: 2em;
+}
+.container--channels .channels h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 110%;
+  cursor: pointer;
+}
+.container--channels .channels h1:hover {
+  color: #000;
+}
+.container--channels .channels p {
+  cursor: pointer;
+  margin: 0;
+  padding: 0.5ex 0;
+}
+.container--channels .channels p:hover {
+  color: #793;
+}
+.container--channels .channels .el {
+  color: #888;
+}
+.container--channels .channels__searches form {
+  margin: 0;
+  padding: 1ex 0;
+}
+.container--channels .channels__searches p,
+.container--channels .channels__userTimelines p {
+  display: table;
+  width: 100%;
+}
+.container--channels .channels__searches p span,
+.container--channels .channels__userTimelines p span,
+.container--channels .channels__searches p .el,
+.container--channels .channels__userTimelines p .el {
+  display: table-cell;
+}
+.container--channels .channels__searches p .el,
+.container--channels .channels__userTimelines p .el {
+  text-align: right;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em;
+  font-size: 0.7em;
+}
+.container--channels .channels__searches p .el:hover,
+.container--channels .channels__userTimelines p .el:hover {
+  color: #943;
+}
+.contextmenu {
+  background-color: #f3f3f3;
+  color: #000;
+  border: 1px solid #999;
+  min-width: 100px;
+  min-height: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 6;
+}
+.contextmenu .contextmenu--item {
+  margin: 0;
+  padding: 4px;
+  cursor: default;
+}
+.contextmenu .contextmenu--item:hover {
+  background-color: #666;
+  color: #fff;
+}
+.modalWindow {
+  display: none;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+}
+.modalWindow .modalWindow--content {
+  width: 80%;
+  height: 80%;
+  background-color: #fafbf8;
+  border-radius: 4px;
+  padding: 1em;
+  overflow: auto;
+}
+.modalWindow .postform {
+  position: static;
+}
+.postform {
+  background-color: #f8f7f1;
+  margin: 0;
+  padding: 1em;
+  box-sizing: border-box;
+}
+.postform textarea {
+  width: 100%;
+  height: 3em;
+}
+.container--sidebar {
+  height: 100%;
+  background-color: #393939;
+}
+.container--sidebar .sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
+.container--sidebar .sidebar__account {
+  margin: 0;
+  padding-bottom: 1em;
+  flex: 0 1 auto;
+}
+.container--sidebar .sidebar__account--current {
+  margin: 0;
+  padding-bottom: 1em;
+  flex: 0 1 auto;
+}
+.container--sidebar .sidebar__account--current img {
+  box-shadow: -24px 0px 24px 0px rgba(255,255,255,0.5);
+}
+.container--sidebar .sidebar img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.container--sidebar .sidebar__plus {
+  flex: 1 1 auto;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.container--sidebar .sidebar__plus .el {
+  cursor: pointer;
+  display: block;
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 16px;
+}
+.container--sidebar .sidebar__plus .el:hover {
+  color: #fff;
+}
+.timeline {
+  padding: 0 1em;
+  height: 100%;
+  overflow: auto;
+}
+.timeline__tweets .el,
+.timeline__tweets--loading .el {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #c0c9c0;
+}
+.tweet,
+.tweet--selected {
+  padding: 1ex 0;
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tweet .tweet__userimage img,
+.tweet--selected .tweet__userimage img {
+  width: 32px;
+  height: 32px;
+}
+.tweet .tweet__media,
+.tweet--selected .tweet__media {
+  max-width: 160px;
+  max-height: 160px;
+  display: inline-block;
+  padding-right: 1ex;
+}
+.tweet .tweet__protectedIcon,
+.tweet--selected .tweet__protectedIcon {
+  font-size: 9px;
+  color: #666;
+}
+.tweet .tweet__userimage,
+.tweet--selected .tweet__userimage {
+  display: table-cell;
+  width: 36px;
+}
+.tweet .tweetBody,
+.tweet--selected .tweetBody {
+  display: table-cell;
+  vertical-align: top;
+  word-break: break-word;
+}
+.tweet .tweetBody__head,
+.tweet--selected .tweetBody__head {
+  padding: 0;
+  margin: 0;
+}
+.tweet .tweetBody__body,
+.tweet--selected .tweetBody__body {
+  padding: 0 0 0.5ex 0;
+  margin: 0;
+}
+.tweet .tweetBody__timestamp,
+.tweet--selected .tweetBody__timestamp {
+  float: right;
+  font-family: monospace;
+  color: #998;
+  text-decoration: none;
+}
+.tweet .tweetBody__userName,
+.tweet--selected .tweetBody__userName {
+  padding-left: 1ex;
+}
+.tweet .tweetBody__screenName,
+.tweet--selected .tweetBody__screenName {
+  cursor: pointer;
+}
+.tweet .tweetBody__source a,
+.tweet--selected .tweetBody__source a {
+  color: #998;
+  text-decoration: none;
+}
+.tweet .tweetBody__social,
+.tweet--selected .tweetBody__social {
+  color: #998;
+}
+.tweet .tweetBody__social > em,
+.tweet--selected .tweetBody__social > em {
+  padding-right: 1ex;
+}
+.tweet .tweetBody__showConversation,
+.tweet--selected .tweetBody__showConversation {
+  padding-right: 1em;
+  cursor: pointer;
+}
+.tweet .tweetBody__showConversation .el,
+.tweet--selected .tweetBody__showConversation .el {
+  color: #000;
+}
+.tweet .tweet__retweet img,
+.tweet--selected .tweet__retweet img {
+  width: 16px;
+  height: 16px;
+}
+.tweet--selected {
+  background-color: #e9e9e9;
+}

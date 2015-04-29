@@ -3,7 +3,6 @@ import React from "react";
 import _ from "lodash";
 
 import Tweet from "./tweet.jsx";
-import TweetForm from "./tweet_form.jsx";
 import Conversation from "./conversation.jsx";
 
 export default React.createClass({
@@ -24,7 +23,6 @@ export default React.createClass({
   render() {
     var className = this.state.loading ?  "timeline__tweets--loading" : "timeline__tweets";
     return <div className="timeline" onScroll={this.onScroll}>
-      <TweetForm client={this.props.client} />
       <div className={className}>
         {
           this.state.tweets.map((tweet) => {

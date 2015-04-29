@@ -8,6 +8,7 @@ export default Fluxxor.createStore({
     "updateStatus": "updateStatus",
     "retweetThis": "retweet",
     "removeThis": "remove",
+    "fetchFriendship": "fetchFriendship",
   },
 
   initialize(screenName = null) {
@@ -43,5 +44,10 @@ export default Fluxxor.createStore({
 
   remove(id) {
     this.client.destroy(id);
+  },
+
+  fetchFriendship(targetName) {
+    this.client.friendshipsShow(this.currentUser, targetName).then((result) => {
+    });
   }
 });

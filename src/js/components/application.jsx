@@ -34,7 +34,7 @@ export default React.createClass({
         <Channels currentUser={this.state.currentUser} />
       </div>
       <div className="container--main">
-        <Main currentUser={this.state.currentUser} />
+        <Main client={this.state.client} currentUser={this.state.currentUser} />
       </div>
       <ContextMenu />
       <ModalWindow />

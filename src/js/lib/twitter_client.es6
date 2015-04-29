@@ -161,4 +161,21 @@ export default class TwitterClient {
     console.log(_.merge(defaultParams, params));
     return this.request("/conversation/show.json", "GET", _.merge(defaultParams, params));
   }
+
+  usersShow(screenName) {
+    return this.request("/users/show.json", "GET", {screen_name: screenName, include_entities: "true"});
+  }
+
+  friendshipsCreate(screenName, options = {}) {
+    var defaultParams = { follow: "false" };
+    return this.request("/friendships/create.json", "POST", _.merge(defaultParams, {screen_name: screenName}, params));
+  }
+
+  friendshipsDestroy(screenName) {
+    return this.request("/friendships/create.json", "POST", {screen_name: screenName});
+  }
+
+  friendshipsShow(name1, name2) {
+    return this.request("/friendships/show.json", "GET", {source_screen_name: name1, target_screen_name: name2});
+  }
 }
