@@ -24,7 +24,7 @@ export default React.createClass({
 
   onClick(ev) {
     if(ev.target !== ev.currentTarget) return;
-    this.getFlux().actions.hideModalWindow();
+    this.getFlux().actions.modalWindow.close();
   }
 });
 

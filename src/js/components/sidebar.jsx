@@ -35,7 +35,7 @@ export default React.createClass({
           flux.actions.registerAccountTokens(params);
         });
       }
-      flux.actions.displayModalWindow(
+      flux.actions.modalWindow.open(
         <form flux={flux} onSubmit={onSubmit}>
           <input type="text" name="pin" />
         </form>

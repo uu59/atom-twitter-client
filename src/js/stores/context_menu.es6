@@ -2,7 +2,7 @@ import Fluxxor from "fluxxor";
 
 export default Fluxxor.createStore({
   actions: {
-    "contextMenuSet": "onContextMenuSet",
+    "contextMenuClose": "onMenuClose",
     "contextMenuOpen": "onMenuOpen"
   },
 
@@ -23,16 +23,8 @@ export default Fluxxor.createStore({
     };
   },
 
-  onContextMenuSet(state) {
+  onMenuClose() {
     this.display = false;
-    Object.keys(state).forEach((key) => {
-      this[key] = state[key];
-    })
-    this.emit('change');
-  },
-
-  onChangeContextMenuItem(items) {
-    this.items = items;
     this.emit('change');
   },
 

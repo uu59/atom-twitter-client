@@ -1,5 +1,6 @@
 import Fluxxor from "fluxxor";
 import React from "react";
+import _ from "lodash";
 
 import Application from "./components/application.jsx";
 
@@ -15,6 +16,8 @@ import ConversationStore from "./stores/conversation.es6";
 import TwitterClient from "./lib/twitter_client.es6";
 
 import actions from "./actions.es6";
+import ContextMenuActions from "./actions/context_menu.es6";
+import ModalWindowActions from "./actions/modal_window.es6";
 
 var acc = "uu59";
 var stores = {
@@ -28,7 +31,7 @@ var stores = {
   modalWindow: new ModalWindowStore()
 };
 
-var flux = new Fluxxor.Flux(stores, actions);
+var flux = new Fluxxor.Flux(stores, _.merge(actions, ContextMenuActions, ModalWindowActions));
 
 // Fix superagent urlencode
 if(typeof global.encodeURIComponent === "function") {

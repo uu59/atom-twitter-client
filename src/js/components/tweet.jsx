@@ -63,7 +63,7 @@ function reactFactory() {
 
     onContextmenu(ev, tweet) {
       // select(ev.currentTarget);
-      this.getFlux().actions.contextMenuOpen({
+      this.getFlux().actions.contextMenu.open({
         pos: {
           left: `${ev.pageX}px`,
           top: `${ev.pageY}px`
@@ -99,7 +99,7 @@ function reactFactory() {
     },
 
     itemReplyTo(tweet) {
-      this.getFlux().actions.displayModalWindow(<TweetForm flux={this.getFlux()} replyTo={tweet} />);
+      this.getFlux().actions.modalWindow.open(<TweetForm flux={this.getFlux()} replyTo={tweet} />);
     },
 
     itemRetweet(tweet) {
@@ -113,7 +113,7 @@ function reactFactory() {
     },
 
     itemConversation(tweet) {
-      this.getFlux().actions.displayModalWindow(<Conversation flux={this.getFlux()} id={tweet.id_str} />);
+      this.getFlux().actions.modalWindow.open(<Conversation flux={this.getFlux()} id={tweet.id_str} />);
       this.getFlux().actions.tweetConversationShow(tweet.id_str);
     },
 

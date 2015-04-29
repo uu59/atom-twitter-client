@@ -42,6 +42,6 @@ export default React.createClass({
   },
 
   onClick() {
-    this.getFlux().actions.contextMenuClose();
+    this.getFlux().actions.contextMenu.close();
   }
 });
