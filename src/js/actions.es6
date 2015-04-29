@@ -1,9 +1,14 @@
 import Storage from './lib/storage.es6';
+import ContextMenuActions from "./actions/context_menu.es6";
+import ModalWindowActions from "./actions/modal_window.es6";
 
 export default {
   initialLoad(initialAccount) {
     this.dispatch('changeCurrentUser', initialAccount);
   },
+
+  contextMenu: ContextMenuActions,
+  modalWindow: ModalWindowActions,
 
   registerAccountTokens(params) {
     Storage.set(`token--${params.screenName}`, JSON.stringify(params.tokens));
