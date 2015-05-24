@@ -20,6 +20,7 @@
 
 # Refactor
 
+- Business logics in Store should move to Action
 - Unite "User" and "Account" words to be "Account"
 - `Storage` is too low level, build more higher API such as `AccountStorage`.
 - Rename "Sidebar"
